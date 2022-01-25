@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 
           
-<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/style.css">
 
 
 
@@ -35,12 +35,20 @@
             <div style="display:flex">
                 <h5>Simple Test</h5>
                 <h4>|</h4>
+                <% if(user){ %>
                 <h5>
                     <%= user.username %>
                 </h5>
+                <%}else{%>
+                    <a href="/user" class="btn btn-light">Login or Sign Up</a>
+
+                    <%}%>
             </div>
         
         
         </nav>
 
     </div>
+    <div class="main">
+
+    

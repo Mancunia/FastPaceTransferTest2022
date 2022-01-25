@@ -108,8 +108,20 @@ const login = async(req,res) => {
 }
 
 
+const page =async(req, res)=>{
+    try{
+        res.render('user');
+
+    }
+    catch(error){
+        res.status(404).json({error});
+    }
+}
+
+
 
 module.exports ={
     newUser,
-    login
+    login,
+    page
 }

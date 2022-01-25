@@ -78,7 +78,7 @@ const getQuestions = async(req,res)=>{
         // if(!thisTest){
         //     throw 'Error getting tests';
         // }
-        res.status(200).json({tests:thisTest});
+        res.status(200).json({questions:thisTest});
 
     }
     catch(error){
