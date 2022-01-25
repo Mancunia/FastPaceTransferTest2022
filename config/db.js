@@ -5,7 +5,7 @@ const sequelize = new Sequelize(
   'root',
   '',{
       host:'localhost',
-      dialet:'mysql',
+      dialect:'mysql',
       operatorsAliases:false,//
 
       pool:{
@@ -17,22 +17,6 @@ const sequelize = new Sequelize(
       }
   
 );
-
-// module.exports= {
-
-//       DB:'fastPace_test',
-//       HOST:'localhost',
-//       USER:'root',
-//       PASSWORD:'',
-//       dialect:'mysql',
-
-//       pool:{
-//         max:5, 
-//         min:0,
-//         acquire:30000,
-//         idle:10000
-//   }
-// }
 
 
 module.exports=sequelize
