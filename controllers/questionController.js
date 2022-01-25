@@ -91,14 +91,14 @@ const updateQuestion = async(req,res) => {
         if(!req.cookies.user){
             throw 'No user logged in'
         }   
-        const {questionID,question} = req.body;
+        const {questionRef,question} = req.body;
         const user = (await decode_JWT(req.cookies.user))._id;
         const thisUser = await Users.locate(user);
 
         const updateState = await Question.OverRide({
             question,
             user:thisUser.id,
-            questionID
+            questionRef
         });
 
         if(!updateState){
@@ -117,11 +117,11 @@ const deleteQuestion = async(req,res) => {
         if(!req.cookies.user){
             throw 'No user logged in'
         }  
-        const {questionID} = req.body;
+        const {questionRef} = req.body;
         const user = (await decode_JWT(req.cookies.user))._id;
         const thisUser = await Users.locate(user);
 
-       const state= await Question.Drop({questionID,user:thisUser.id});
+       const state= await Question.Drop({questionRef,user:thisUser.id});
        if(!state){
            throw "Error performing action"
        }

@@ -115,7 +115,7 @@ module.exports=(sequelize,DataTypes)=>{//user model
             
             const deleteState = await this.destroy({where:{id:thisAnswer.id}});
 
-            console.log(deleteState);
+            return deleteState;
 
 
         }

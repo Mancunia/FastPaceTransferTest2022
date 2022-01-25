@@ -27,9 +27,9 @@ module.exports=(sequelize,DataTypes)=>{
 
     Question.OverRide = async function(data){
         try{
-            const {questionID,user,question}=data;
+            const {questionRef,user,question}=data;
 
-            const thisQuestion = await this.findOne({where:{id:questionID}});
+            const thisQuestion = await this.findOne({where:{ref:questionRef}});
             if(!thisQuestion){//look for answer
                 throw "Not found";
             }
@@ -53,12 +53,12 @@ module.exports=(sequelize,DataTypes)=>{
 
     Question.Drop = async function(data){
         try{
-            const {questionID,user}=data;
-            if(!user||!questionID){
+            const {questionRef,user}=data;
+            if(!user||!questionRef){
                 throw "ID missing";
             }
 
-            const thisQuestion = await this.findOne({where:{id:questionID}});
+            const thisQuestion = await this.findOne({where:{ref:questionRef}});
             if(!thisQuestion){//look for answer
                 throw "Not found";
             }
