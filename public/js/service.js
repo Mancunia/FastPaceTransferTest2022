@@ -96,9 +96,28 @@ const signIn = async(body)=>{//SIGN IN for current user
 //     }
 // }
 //........................................................QUESTIONS.......................................................
-const newQuestion = async(body)=>{//ADD A NEW QUESTION VIA A TEST ID
+const newQuestion = async(data)=>{//ADD A NEW QUESTION VIA A TEST ID
     try{
-        
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+                const raw = JSON.stringify({ question:data});
+
+              const requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+              };
+
+        let result = await fetch(`/question/new`,requestOptions);    
+
+        if(result.status>=400){
+                let res = await result.json();
+                throw res.error;
+        }
+                let res = await result.json();
+        return res;
 
     }
     catch(error){

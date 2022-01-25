@@ -29,7 +29,8 @@ module.exports=(sequelize,DataTypes)=>{//user model
 
     Person.newPerson=async function(person){
         try{
-            const myPhone = await this.findOne({phone:person.phone});
+            const myPhone = await this.findOne({where:{phone:person.phone}});
+            console.log(person.phone)
             if(myPhone !==null){
                 throw 'Phone number already exists'
             }

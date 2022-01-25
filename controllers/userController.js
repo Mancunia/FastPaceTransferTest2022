@@ -61,7 +61,8 @@ const newUser = async(req,res)=>{
         if(!done){
             throw 'Error creating account'
         }
-
+        const token = createToken(NewUser.username);
+        res.cookie('user',token,{httpOnly:true,maxAge:maxAge*1000});
         res.status(200).json({status: 'success'});
 
     }
@@ -107,9 +108,16 @@ const login = async(req,res) => {
     }
 }
 
+const logout = async (req,res)=>{//logout ....................................................................................................
+    res.cookie('user','',{maxAge:1,httpOnly:true});
+    res.redirect('/');
+}
 
 const page =async(req, res)=>{
     try{
+        if(req.cookies.user){
+            res.redirect('/');
+        }
         res.render('user');
 
     }
@@ -123,5 +131,6 @@ const page =async(req, res)=>{
 module.exports ={
     newUser,
     login,
-    page
+    page,
+    logout
 }

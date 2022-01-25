@@ -1,6 +1,22 @@
 <%- include('partials/header'); %>
 <!-- main -->
+<div class="container">
 
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+           New Question
+        </div>
+        <div class="card-body">
+            <div class="row">
+            <label for="email">Question</label>
+            <input class="form-control" type="text" id="question" placeholder="Enter new question">
+            </div>
+            <button class="btn btn-dark" id="addQuestion">Post</button>
+        </div>
+    </div>
+
+</div>
 
 <!-- main -->
 <%- include('partials/footer') %>
+<script defer type="text/javascript" src="/js/question.js"></script>

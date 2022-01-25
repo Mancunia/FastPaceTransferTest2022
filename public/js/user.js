@@ -8,7 +8,7 @@ const Login = async (data) => {
 
         const log = await signIn({email,password});
         if(!log){
-            throw "Error logginf in";
+            throw "Error logging in";
         }
         return true
 
@@ -20,12 +20,24 @@ const Login = async (data) => {
 
 const Sign_Up = async (data) => {
     try{
-        const {email,password}=data;
+        const {email,password,firstname,lastname,account,phone}=data;
         if(!email||!password){
             throw "Incomplete";
         }
 
-        const log = await signIn({email,password});
+        const log = await signUp({
+            account:{
+                email,
+            username,
+            password,
+            account       
+        },
+            person:{
+                firstname,
+                lastname,
+                phone
+            }
+        });
         if(!log){
             throw "Error logginf in";
         }
@@ -67,6 +79,7 @@ const events = async()=>{
         login.on('click',async()=>{
             let email = $('#Uemail').val();
             let password = $('#Upassword').val();
+           
 
             let loging = await Login({email,password});
 
@@ -79,7 +92,28 @@ const events = async()=>{
 
         const signup = $('#signupBTN');
 
-        signup.on('click',()=>{
+        signup.on('click',async ()=>{
+            let email = $('#email').val();
+            let password = $('#password').val();
+            let username = $('#username').val();
+            let firstname = $('#firstname').val();
+            let lastname = $('#lastname').val();
+            let account = $('#account').val();
+            let phone = $('#phone').val();
+
+            let loging = await Sign_Up({email,
+                password,
+                username,
+                firstname,
+                lastname,
+                account,
+                phone
+            });
+
+            if(!loging){
+                throw "Incomplete"
+            }
+            location.href = "/";
             
         })
 

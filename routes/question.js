@@ -1,5 +1,5 @@
 const {Router}  = require('express');
-const {newQuestion,getQuestions,updateQuestion,deleteQuestion}=require('../controllers/questionController')
+const {newQuestion,getQuestions,updateQuestion,deleteQuestion,page}=require('../controllers/questionController')
 const {questionAnswer,getAnswers,updateAnswer,deleteAnswer}=require('../controllers/answerController')
 
 
@@ -13,7 +13,7 @@ router.post('/answer',questionAnswer);
 router.put('/answer',updateAnswer);
 router.put('/update',updateQuestion);
 
-
+router.get('/',page);
 router.get('/questions',getQuestions);
 router.get('/answers',getAnswers);
 

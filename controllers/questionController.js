@@ -74,7 +74,9 @@ const newQuestion = async (req, res) => {
 const getQuestions = async(req,res)=>{
     try{
 
-        const thisTest = await Question.findAll({where:{active:1}});
+        const thisTest = await Question.findAll({where:{active:1},order: [
+            ['id', 'DESC']
+        ]});
         // if(!thisTest){
         //     throw 'Error getting tests';
         // }
@@ -135,6 +137,15 @@ const deleteQuestion = async(req,res) => {
     }
 }
 
+const page = async(req,res) => {
+    try{
+        res.render('test');
+    }
+    catch(error){
+        res.status(404).json({error})
+    }
+}
+
 
 
 
@@ -142,5 +153,6 @@ module.exports={
     newQuestion,
     getQuestions,
     updateQuestion,
-    deleteQuestion
+    deleteQuestion,
+    page
 }
