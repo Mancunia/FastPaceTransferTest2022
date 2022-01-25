@@ -11,10 +11,10 @@ const {genRandCode,decode_JWT} = require('../utils/util');
 */
 const questionAnswer = async(req,res)=>{
     try{
-        if(!req.cookies.jwt){
+        if(!req.cookies.user){
             throw 'Login required'
         }
-        const user = (await decode_JWT(req.cookies.jwt))._id;
+        const user = (await decode_JWT(req.cookies.user))._id;
         const {answer,questionRef}=req.body;
 
         if(!answer||!questionRef){
@@ -69,11 +69,11 @@ const getAnswers = async(req,res) => {
 //Update Answer
 const updateAnswer = async(req,res) => {
     try{
-        if(!req.cookies.jwt){
+        if(!req.cookies.user){
             throw 'No user logged in'
         }   
         const {answerID,answer} = req.body;
-        const user = (await decode_JWT(req.cookies.jwt))._id;
+        const user = (await decode_JWT(req.cookies.user))._id;
         const thisUser = await Users.locate(user);
 
         const updateState = await Answer.OverRide({
@@ -95,11 +95,11 @@ const updateAnswer = async(req,res) => {
 //Delete an answer
 const deleteAnswer = async(req,res) => {
     try{
-        if(!req.cookies.jwt){
+        if(!req.cookies.user){
             throw 'No user logged in'
         }  
         const {answerID} = req.body;
-        const user = (await decode_JWT(req.cookies.jwt))._id;
+        const user = (await decode_JWT(req.cookies.user))._id;
         const thisUser = await Users.locate(user);
 
        const state= await Answer.Drop({answerID,user:thisUser.id});

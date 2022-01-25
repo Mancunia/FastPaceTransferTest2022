@@ -11,10 +11,10 @@ const {genRandCode,decode_JWT} = require('../utils/util');
 
 const newQuestion = async (req, res) => {
     try{
-        if(!req.cookies.jwt){
+        if(!req.cookies.user){
             throw 'User not logged in';
         }
-        const user = (await decode_JWT(req.cookies.jwt))._id;
+        const user = (await decode_JWT(req.cookies.user))._id;
          console.log(user)
         const thisUser = await Users.findOne({where:{username:user}})
        if(thisUser.account!==1){//1 is for Admin
@@ -88,11 +88,11 @@ const getQuestions = async(req,res)=>{
 
 const updateQuestion = async(req,res) => {
     try{
-        if(!req.cookies.jwt){
+        if(!req.cookies.user){
             throw 'No user logged in'
         }   
         const {questionID,question} = req.body;
-        const user = (await decode_JWT(req.cookies.jwt))._id;
+        const user = (await decode_JWT(req.cookies.user))._id;
         const thisUser = await Users.locate(user);
 
         const updateState = await Question.OverRide({
@@ -114,15 +114,18 @@ const updateQuestion = async(req,res) => {
 
 const deleteQuestion = async(req,res) => {
     try{
-        if(!req.cookies.jwt){
+        if(!req.cookies.user){
             throw 'No user logged in'
         }  
         const {questionID} = req.body;
-        const user = (await decode_JWT(req.cookies.jwt))._id;
+        const user = (await decode_JWT(req.cookies.user))._id;
         const thisUser = await Users.locate(user);
 
-        await Question.Drop({questionID,user:thisUser.id});
-        res.end()
+       const state= await Question.Drop({questionID,user:thisUser.id});
+       if(!state){
+           throw "Error performing action"
+       }
+        res.status(200).json({state:"Success"})
 
 
     }

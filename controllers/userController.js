@@ -75,7 +75,7 @@ const newUser = async(req,res)=>{
 const login = async(req,res) => {
     try{
         // console.log(req.cookies)
-        if(req.cookies.jwt){
+        if(req.cookies.user){
             throw 'A User is logged in already'
         }
 
@@ -94,7 +94,7 @@ const login = async(req,res) => {
 
     }
 
-      res.cookie('jwt',token,{httpOnly:true,maxAge:maxAge*1000});
+      res.cookie('user',token,{httpOnly:true,maxAge:maxAge*1000});
 
       res.status(200).json({user});
 
